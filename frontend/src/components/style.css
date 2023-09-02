@@ -3196,3 +3196,18 @@ input:checked{
 .hidden-nav-categories{
     display: none;
 }
+
+.loader {
+    margin: auto;
+    border: 20px solid #EAF0F6;
+    border-radius: 50%;
+    border-top: 20px solid #832729;
+    width: 150px;
+    height: 150px;
+    animation: spinner 4s linear infinite;
+  }
+  
+  @keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
