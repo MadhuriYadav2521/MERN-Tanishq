@@ -9,7 +9,7 @@ const initialState = { user: null, cart: [] };
 const reducer = (state, action) => {
     switch (action.type) {
         case "Login":
-            return { ...state, user: action.payload, cart: action.cartPayload }
+            return { ...state, user: action.payload }
         case "Logout":
             localStorage.removeItem("TanishqJWT");
             toast.success("Logged out!")
