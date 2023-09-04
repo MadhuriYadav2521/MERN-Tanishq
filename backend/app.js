@@ -2,9 +2,8 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
-import userRoute from "./routes/userRoute.js";
+import router from "./routes/index.js";
 import mongoose from "mongoose";
-import productRoute from "./routes/productRoute.js";
 dotenv.config();
 
 const app = express();
@@ -12,8 +11,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
-app.use(userRoute);
-app.use(productRoute);
+app.use(router);
 
 
 mongoose.connect(process.env.CONNECTION)

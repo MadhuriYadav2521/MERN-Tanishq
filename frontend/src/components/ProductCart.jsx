@@ -1,48 +1,18 @@
 import "../components/style.css";
 import "../components/responsive.css";
-import * as Icon from "react-bootstrap-icons";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { useNavigate, useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { toast } from "react-hot-toast";
-import { AuthContext } from "../Context/AuthContext";
+
 
 const ProductCart = () => {
-    const route = useNavigate()
-    const { state, dispatch } = useContext(AuthContext)
-    const { id } = useParams()
-    const [cart, setCart] = useState([]);
-    const currentUser = state ? state.user?.id : null;
-    console.log(currentUser, "current user from frontend");
-    useEffect(() => {
-        const addToCart = async () => {
-            try {
-                const response = await axios.post(`http://localhost:8000/addToCart/${id}`, { currentUser });
-                console.log(response, "cart from frontend");
-                if (response.data.success) {
-                    
-                    setCart(response.data.cart)
-                    toast.success("Product added to cart!")
-                    
-                } else {
-                    toast.error(response.data.error)
-                }
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        addToCart()
-    }, [])
-    console.log(cart,"cart from frontend");
+ 
+       
 
     return (
         <div>
 
             <div className="screen">
                 <Navbar />
-                {cart?.length ? (
                 <div class="cart-section">
                     <div class="cart-container">
                         <div class="cart-login-section">
@@ -160,9 +130,7 @@ const ProductCart = () => {
                         </div>
                     </div>
                 </div>
-                ):(
-                    <div><h1>Cart is empty!</h1></div>
-                )}
+               
                 <Footer />
             </div>
 

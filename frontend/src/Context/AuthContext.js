@@ -34,7 +34,6 @@ export const HandleAuth = ({ children }) => {
                     dispatch({
                         type: "Login",
                         payload: response.data.user,
-                        // cartPayload: response.data.cart
                     })
                     console.log("after res.scuccess");
                 } else {

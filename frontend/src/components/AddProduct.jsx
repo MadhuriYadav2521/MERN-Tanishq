@@ -15,7 +15,7 @@ const AddProduct = () => {
         event.preventDefault();
         const { productName, price, productImg } = productData
         console.log(productName, price, productImg);
-        const response = await axios.post('http://localhost:8000/addProduct', { productData });
+        const response = await axios.post('http://localhost:8000/admin/addProduct', { productData });
         if (response.data.success) {
             setProductData({ productName: '', price: '', productImg: '' });
             toast.success("Product added successfully!")

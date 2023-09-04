@@ -73,27 +73,25 @@ export const CurrentUser = async (req, res) => {
 
 export const addToCart = async (req, res) => {
     try {
-        const id = req.params.id
-        const currentUser = req.body.currentUser
-        // console.log(currentUser, "currentUser");
-        const cUser = await Users.findOne({_id: currentUser})
-        // console.log(cUser,"cUser");
-        // console.log(id, "idd back");
-        const product = await Products.findOne({ _id: id }).exec();
-        console.log(product, "proodct");
-        if (product) {
-            const existingProduct = cUser.cart.includes(id);
-            // console.log(existingProduct, "exxx pro");
-            if (existingProduct) return res.json({ error: "Product already in cart!" })
+        const { productId, userId } = req.body
+        if (!productId) return res.json({ error: "Product id is required!" })
+        if (!userId) return res.json({ error: "User id is required!" })
+        console.log(productId, userId, "pid,currentUser");
 
-            const cart = await Users.findOneAndUpdate({ _id: currentUser }, { $push: { cart: id } }, { new: true }).exec();
-            console.log(cart, "caaaaaaaaaart");
-            return res.json({ success: true, cart })
-        } else {
-            return res.json({ error: "Product not found!" })
-        }
+         // Check if the product is already in the user's cart
+         const cUser = await Users.findOne({_id: userId}).exec();
+         const existingProduct = cUser.cart.includes(productId);
+         console.log(existingProduct, "existingProduct");
+         if (existingProduct) return res.json({ error: "Product already in cart!" });
+
+        const user = await Users.findOneAndUpdate({ _id: userId }, { $push: { cart: productId } }, { new: true }).exec();
+        if (!user) return res.json({ error: "User not found!" });
+        console.log(user, "userData");
+        return res.json({ success: true });
+
     } catch (err) {
         console.log(err);
         return res.json({ error: "Internal server error!" })
     }
 }
+

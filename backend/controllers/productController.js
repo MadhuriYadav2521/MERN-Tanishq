@@ -39,6 +39,7 @@ export const getAllProducts = async (req,res) =>{
 export const getSingleProduct = async (req,res) =>{
     try {
         const id = req.params.id
+        if(!id) return res.json({error: "Product id is required!"})
         const product = await Products.findOne({_id: id}).exec();
         console.log(product);
         if(product){

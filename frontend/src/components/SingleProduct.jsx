@@ -4,16 +4,18 @@ import * as Icon from "react-bootstrap-icons";
 import AuthProtected from "./AuthProtected";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { Route, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { AuthContext } from "../Context/AuthContext";
 
 const SingleProduct = () => {
     const { id } = useParams();
     const [product, setProduct] = useState()
-    const route = useNavigate()
+    const {state} = useContext(AuthContext)
 
+    // pass product id to backend and get product desc then display.
     useEffect(() => {
         console.log("innnn");
         const getSingleProduct = async () => {
@@ -28,7 +30,28 @@ const SingleProduct = () => {
         }
         getSingleProduct()
 
-    }, [id])
+    }, [id])  // product in displayed based on product id ...dependancy
+
+    // add product to cart
+    const addToCart = async () =>{
+        if(id && state?.user){
+            try {
+                const {data} = await axios.post("http://localhost:8000/buyer/addToCart",{productId : id, userId : state?.user?.id})
+                console.log(data, "data");
+                if(data.success){
+                    toast.success("Product added to cart!")
+                }else{
+                    toast.error(data.error)
+                }
+                
+            } catch (err) {
+                console.log(err);
+                toast.error()
+            }
+        }else{
+            toast.error("Internal server error!")
+        }
+    }
 
     return (
         <AuthProtected>
@@ -121,7 +144,7 @@ const SingleProduct = () => {
                                         <div class="offer-txt">gold purity : 14 karat</div>
                                         <div class="p-related-text">Not sure What ti buy? Checkout our <span>Buying Guides</span></div>
                                         <div class="sp-buttons" id="forAddToCart" >
-                                            <button onClick={() => route(`/productCart/${product._id}`)} class="sp-primary-btn">Add to cart</button>
+                                            <button onClick={addToCart} class="sp-primary-btn">Add to cart</button>
                                             <a class="sp-secondary-btn">buy now</a>
                                         </div>
                                         <hr />
