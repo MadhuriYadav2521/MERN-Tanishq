@@ -13,7 +13,11 @@ const reducer = (state, action) => {
         case "Logout":
             localStorage.removeItem("TanishqJWT");
             toast.success("Logged out!")
-            return { ...state, user: null }
+            return { ...state, user: null,cart: [...state.cart, action.payload]  }
+        case "AddToCart":
+            return { ...state, cart: [...state.cart, action.payload] };
+        case "RemoveFromCart":
+            return { ...state, cart: [...state.cart, action.payload] };
         default:
             return state;
     }
@@ -25,7 +29,7 @@ export const HandleAuth = ({ children }) => {
     useEffect(() => {
         async function currentUser() {
             const token = JSON.parse(localStorage.getItem("TanishqJWT"));
-            console.log(token,"token from auth");
+            console.log(token, "token from auth");
             if (token) {
                 console.log("if token");
                 const response = await axios.post("http://localhost:8000/currentUser", { token });
@@ -45,7 +49,7 @@ export const HandleAuth = ({ children }) => {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ state,dispatch }}>
+        <AuthContext.Provider value={{ state, dispatch }}>
             {children}
         </AuthContext.Provider>
     )

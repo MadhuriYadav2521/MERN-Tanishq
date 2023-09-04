@@ -86,8 +86,9 @@ export const addToCart = async (req, res) => {
 
         const user = await Users.findOneAndUpdate({ _id: userId }, { $push: { cart: productId } }, { new: true }).exec();
         if (!user) return res.json({ error: "User not found!" });
-        console.log(user, "userData");
-        return res.json({ success: true });
+        console.log(user.cart, "userData");
+        const product = user.cart;
+        return res.json({ success: true , product});
 
     } catch (err) {
         console.log(err);
@@ -142,5 +143,22 @@ export const removeFromCart = async (req,res) => {
 
     } catch (err) {
         console.log(err);
+    }
+}
+
+export const emptyCart = async (req,res) => {
+    try {
+        const { userId} = req.body;
+        if(userId) return res.json({error: "User id is required!"});
+
+        const user = await Users.findById(userId).populate().exec();
+        if(!user) return res.json({error: "User not found!"});
+
+        const sendToTransactions = {}
+
+
+    } catch (err) {
+        console.log(err);
+        return res.json({error: "Internal server error!"})
     }
 }

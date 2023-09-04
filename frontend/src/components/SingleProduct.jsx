@@ -13,7 +13,7 @@ import { AuthContext } from "../Context/AuthContext";
 const SingleProduct = () => {
     const { id } = useParams();
     const [product, setProduct] = useState()
-    const {state} = useContext(AuthContext)
+    const {state, dispatch} = useContext(AuthContext)
 
     // pass product id to backend and get product desc then display.
     useEffect(() => {
@@ -39,6 +39,10 @@ const SingleProduct = () => {
                 const {data} = await axios.post("http://localhost:8000/buyer/addToCart",{productId : id, userId : state?.user?.id})
                 console.log(data, "data");
                 if(data.success){
+                    dispatch({
+                        type: "AddToCart",
+                        payload : data.product
+                    })
                     toast.success("Product added to cart!")
                 }else{
                     toast.error(data.error)
