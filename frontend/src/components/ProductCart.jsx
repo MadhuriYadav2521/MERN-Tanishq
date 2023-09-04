@@ -2,10 +2,34 @@ import "../components/style.css";
 import "../components/responsive.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import { toast } from "react-hot-toast";
+import axios from "axios";
 
 
 const ProductCart = () => {
- 
+    const [cart, setCart] = useState()
+    const {state} = useContext(AuthContext)
+
+    useEffect(()=>{
+        const getCartProduct = async () =>{
+            try {
+                const response = axios.post('http://localhost:8000/buyer/getCartProduct',{userId: state?.user?.id})
+                console.log(response,"response from cart");
+                if(response.data.success){
+                    setCart(response.data.product)
+                }else{
+                    toast.error((await response).data.error)
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        if(state?.user?.id){
+            getCartProduct();
+        }
+    },[state])
        
 
     return (

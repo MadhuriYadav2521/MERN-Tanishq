@@ -95,3 +95,18 @@ export const addToCart = async (req, res) => {
     }
 }
 
+export const getCartProduct = async (req,res) =>{
+    try {
+        const {userId} = req.body;
+        if(!userId) return res.json({error: "User id is required!"});
+
+        const user = await Users.findOne({_id: userId}).populate('cart').exec();
+        console.log(user,"userPopulate");
+        if(!user) return res.json({error: "User not found!"})
+        return r
+
+    } catch (err) {
+        console.log(err);
+        return res.json({error: "Internal server error!"})
+    }
+}
