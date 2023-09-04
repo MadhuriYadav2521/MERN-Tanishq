@@ -75,7 +75,7 @@ const Navbar = () => {
                                 </a>
                             </div>
                             <div className="menu">
-                                <a>
+                                <a onClick={() => route('/productCart')}>
                                     <div className="menu-img">
                                         <Icon.Cart className="bIcon" />
                                     </div>

@@ -78,11 +78,11 @@ export const addToCart = async (req, res) => {
         if (!userId) return res.json({ error: "User id is required!" })
         console.log(productId, userId, "pid,currentUser");
 
-         // Check if the product is already in the user's cart
-         const cUser = await Users.findOne({_id: userId}).exec();
-         const existingProduct = cUser.cart.includes(productId);
-         console.log(existingProduct, "existingProduct");
-         if (existingProduct) return res.json({ error: "Product already in cart!" });
+        // Check if the product is already in the user's cart
+        const cUser = await Users.findOne({ _id: userId }).exec();
+        const existingProduct = cUser.cart.includes(productId);
+        console.log(existingProduct, "existingProduct");
+        if (existingProduct) return res.json({ error: "Product already in cart!" });
 
         const user = await Users.findOneAndUpdate({ _id: userId }, { $push: { cart: productId } }, { new: true }).exec();
         if (!user) return res.json({ error: "User not found!" });
@@ -95,18 +95,52 @@ export const addToCart = async (req, res) => {
     }
 }
 
-export const getCartProduct = async (req,res) =>{
+export const getCartProduct = async (req, res) => {
     try {
-        const {userId} = req.body;
-        if(!userId) return res.json({error: "User id is required!"});
+        const { userId } = req.body;
+        if (!userId) return res.json({ error: "User id is required!" });
 
-        const user = await Users.findOne({_id: userId}).populate('cart').exec();
-        console.log(user,"userPopulate");
-        if(!user) return res.json({error: "User not found!"})
-        return r
+        const user = await Users.findOne({ _id: userId }).populate('cart').exec();
+        console.log(user, "userPopulate");
+        if (!user) return res.json({ error: "User not found!" })
+        console.log(user.cart, "user.cart");
+        const productsOfCart = user.cart;
+        let total = 0;
+        for (let x of productsOfCart) {
+            total = total + parseInt(x.price)
+        }
+        const totalCartProducts = productsOfCart.length
+        console.log(total, "total", totalCartProducts, "totalCartProducts");
+        return res.json({ success: true, productsOfCart, total, totalCartProducts })
 
     } catch (err) {
         console.log(err);
-        return res.json({error: "Internal server error!"})
+        return res.json({ error: "Internal server error!" })
+    }
+}
+
+
+export const removeFromCart = async (req,res) => {
+    try {
+        const { productId, userId} = req.body
+        if(!productId) return res.json({error: "Product id is required!"})
+        if(!userId) return res.json({error: "User id id is required!"})
+
+        const updateCart = await Users.findOneAndUpdate({_id: userId}, {$pull : {cart : productId}}).populate('cart').exec();
+        console.log(updateCart, "up cart");
+        if (!updateCart) return res.json({error: "Error while removing product from cart!"});
+
+        const productsOfCart = updateCart.cart;
+        let total = 0;
+        for (let x of productsOfCart) {
+            total = total + parseInt(x.price)
+        }
+        const totalCartProducts = productsOfCart.length
+        console.log(total, "total", totalCartProducts, "totalCartProducts");
+        return res.json({ success: true, productsOfCart, total, totalCartProducts })
+        
+
+    } catch (err) {
+        console.log(err);
     }
 }

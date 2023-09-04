@@ -17,7 +17,6 @@ const SingleProduct = () => {
 
     // pass product id to backend and get product desc then display.
     useEffect(() => {
-        console.log("innnn");
         const getSingleProduct = async () => {
             console.log(id, "iddddd");
             const response = await axios.get(`http://localhost:8000/getSingleProduct/${id}`);
@@ -36,6 +35,7 @@ const SingleProduct = () => {
     const addToCart = async () =>{
         if(id && state?.user){
             try {
+                console.log(typeof(id),"state?.user?.id");
                 const {data} = await axios.post("http://localhost:8000/buyer/addToCart",{productId : id, userId : state?.user?.id})
                 console.log(data, "data");
                 if(data.success){
@@ -46,7 +46,6 @@ const SingleProduct = () => {
                 
             } catch (err) {
                 console.log(err);
-                toast.error()
             }
         }else{
             toast.error("Internal server error!")

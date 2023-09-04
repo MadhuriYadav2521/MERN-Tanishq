@@ -44,10 +44,10 @@ const Home = () => {
                             </div>
                         </div>
                         <div id="bullets">
-                            <label for="slide1"></label>
-                            <label for="slide2"></label>
-                            <label for="slide3"></label>
-                            <label for="slide4"></label>
+                            <label htmlFor="slide1"></label>
+                            <label htmlFor="slide2"></label>
+                            <label htmlFor="slide3"></label>
+                            <label htmlFor="slide4"></label>
                         </div>
                     </div>
 
@@ -364,9 +364,9 @@ const Home = () => {
                 </div>
                 <div className="banner-video">
                     <iframe width="100%" height="400" src="https://www.youtube.com/embed/omr0ZiQhUAo?autoplay=1&mute=1"
-                        title="YouTube video player" frameborder="0"
+                        title="YouTube video player" frameBorder="0"
                         allow="accelerometer;clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
+                        allowFullScreen></iframe>
                     <button className="explorer-btn">Explorer more</button>
 
                 </div>
