@@ -72,6 +72,28 @@ const ProductCart = () => {
         }
     };
 
+    const  buyNow = async () =>{
+        try {
+            console.log(cart,totalPrice, totalProducts,"cart,totalPrice, totalProducts from buynow");
+            const response = await axios.post('http://localhost:8000/buyer/buyNow',{ userId: state?.user?.id, cart,totalPrice, totalProducts })
+            console.log(response,"res from buy now");
+            if(response.data.success){
+                dispatch({
+                    type: "buyNow",
+                    payload : response.data.finalCart
+                })
+                setCart(response.data.finalCart)
+    
+                toast.success("Order placed!");
+            }else{
+                toast.error("Error while processing transaction!")
+            }
+        } catch (err) {
+            console.log(err);
+            toast.error("Internal server error!")
+        }
+    }
+
     return (
         <div>
 
@@ -198,22 +220,18 @@ const ProductCart = () => {
                                     </div>
                                     <div className="checkout-section">
                                         <a ><button className="continue-shopping-btn" onClick={() => router('/')} >Continue Shopping</button></a>
-                                        <a ><button className="checkout-btn" onClick={() => router('/successPage')} >Proceed to Checkout</button></a>
+                                        <a ><button className="checkout-btn" onClick={buyNow} >Buy Now</button></a>
                                     </div>
                                 </div>
                             </div>
                         ) : (
-                            <div>
-                                <div className="no-content">
-                                    <div >
-                                        <img src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-5521508-4610092.png" alt="" />
-                                    </div>
-                                    <div>
-                                        <button onClick={() => router('/')} className="checkout-btn">Continue shopping</button>
-                                    </div>
+                            <div className="screen">
+                                <div className="cFooterImgContent">
+                                   <img src="https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dw39d0b5f4/images/cart/Group14779.svg" alt="" />
+                                    <button onClick={() => router('/')} className="checkout-btn">Continue shopping</button>
                                 </div>
-                            </div>
 
+                            </div>
                         )}
                     </div>
                 )}

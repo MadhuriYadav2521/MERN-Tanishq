@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Nunito Sans, sans-serif;
+    text-decoration:  none !important;
 }
 
 html {
@@ -3239,4 +3240,17 @@ input:checked{
 }
 .spFooterImgContent img{
     width: 50%;
+}
+.cFooterImgContent{
+    width: 90%;
+    /* border: 1px solid salmon; */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.cFooterImgContent img{
+    width: 20%;
+    padding: 2rem 0;
 }

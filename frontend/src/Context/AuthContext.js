@@ -18,6 +18,8 @@ const reducer = (state, action) => {
             return { ...state, cart: [...state.cart, action.payload] };
         case "RemoveFromCart":
             return { ...state, cart: [...state.cart, action.payload] };
+        case "buyNow":
+            return {...state, cart: [...state.cart, action.payload] }
         default:
             return state;
     }

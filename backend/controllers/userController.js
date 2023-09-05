@@ -2,6 +2,7 @@ import Users from "../modals/userModal.js"
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Products from "../modals/productModal.js";
+import Transactions from "../modals/transactionModal.js"
 
 
 export const Register = async (req, res) => {
@@ -88,7 +89,7 @@ export const addToCart = async (req, res) => {
         if (!user) return res.json({ error: "User not found!" });
         console.log(user.cart, "userData");
         const product = user.cart;
-        return res.json({ success: true , product});
+        return res.json({ success: true, product });
 
     } catch (err) {
         console.log(err);
@@ -121,15 +122,15 @@ export const getCartProduct = async (req, res) => {
 }
 
 
-export const removeFromCart = async (req,res) => {
+export const removeFromCart = async (req, res) => {
     try {
-        const { productId, userId} = req.body
-        if(!productId) return res.json({error: "Product id is required!"})
-        if(!userId) return res.json({error: "User id id is required!"})
+        const { productId, userId } = req.body
+        if (!productId) return res.json({ error: "Product id is required!" })
+        if (!userId) return res.json({ error: "User id id is required!" })
 
-        const updateCart = await Users.findOneAndUpdate({_id: userId}, {$pull : {cart : productId}}).populate('cart').exec();
+        const updateCart = await Users.findOneAndUpdate({ _id: userId }, { $pull: { cart: productId } }).populate('cart').exec();
         console.log(updateCart, "up cart");
-        if (!updateCart) return res.json({error: "Error while removing product from cart!"});
+        if (!updateCart) return res.json({ error: "Error while removing product from cart!" });
 
         const productsOfCart = updateCart.cart;
         let total = 0;
@@ -139,26 +140,47 @@ export const removeFromCart = async (req,res) => {
         const totalCartProducts = productsOfCart.length
         console.log(total, "total", totalCartProducts, "totalCartProducts");
         return res.json({ success: true, productsOfCart, total, totalCartProducts })
-        
+
 
     } catch (err) {
         console.log(err);
     }
 }
 
-export const emptyCart = async (req,res) => {
+export const buyNow = async (req, res) => {
     try {
-        const { userId} = req.body;
-        if(userId) return res.json({error: "User id is required!"});
+        const { userId, cart, totalPrice, totalProducts } = req.body;
+        if (!userId) return res.json({ error: "User id is required!" });
+        console.log(userId, cart, totalPrice, totalProducts, " userId, cart,totalPrice, totalProducts");
 
         const user = await Users.findById(userId).populate().exec();
-        if(!user) return res.json({error: "User not found!"});
+        if (!user) return res.json({ error: "User not found!" });
 
-        const sendToTransactions = {}
+        //   extract product ids from the cart array
+        const productIds = cart.map(item => item._id);
 
+        const currentDate = new Date();  
+
+        const transactionObj = {
+            userId: user._id,
+            cart: productIds, 
+            totalPrice,
+            totalProducts,
+            createdAt: currentDate, 
+        };
+
+        const addToTransaction = new Transactions({ transaction: transactionObj })
+        await addToTransaction.save();
+        console.log(addToTransaction, "addToTransactions");
+
+        const updateCart = await Users.findOneAndUpdate({ _id: userId }, { cart: [] }).exec();
+        console.log(updateCart, "updateUserrr");
+        const finalCart = updateCart.cart
+
+        return res.json({ success: true, finalCart })
 
     } catch (err) {
         console.log(err);
-        return res.json({error: "Internal server error!"})
+        return res.json({ error: "Internal server error!" })
     }
 }

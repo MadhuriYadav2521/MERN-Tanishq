@@ -11,6 +11,7 @@ import AddProduct from './components/AddProduct';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AdminNavbar from './components/AdminNavbar';
+import OrderHistory from './components/OrderHistory';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/productCart' element={<ProductCart />} />
         <Route path='/successPage' element={<SuccessPage />} />
         <Route path='/addProduct' element={<AddProduct />} />
+        <Route path='/orderHistory' element={<OrderHistory />} />
       </Routes>
     </div>
   );
