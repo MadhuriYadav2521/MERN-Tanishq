@@ -10,6 +10,7 @@ import SuccessPage from './components/SuccessPage';
 import AddProduct from './components/AddProduct';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import AdminNavbar from './components/AdminNavbar';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='navbar' element={<Navbar />} />
         <Route path='footer' element={<Footer />} />
+        <Route path='adminNavbar' element={<AdminNavbar />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/multipleProducts' element={<MultipleProducts />} />

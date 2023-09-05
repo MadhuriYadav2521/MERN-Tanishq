@@ -18,7 +18,17 @@
     html {
         font-size: 60%;
     }
-   
+    .screen{
+        margin-top: 13rem;
+        /* border: 1px solid orangered; */
+    }
+    .add-product-container form{
+        /* width: 80%; */
+        padding: 1rem;
+        /* border: 1px solid black; */
+        margin: 2rem auto;
+
+    }
     .top-navbar-container {
         width: 100%;
         margin-left: .5rem;
@@ -336,6 +346,27 @@
 
     .product-desc-wrapper {
         width: 93%;
+    }
+    .add-product-container form{
+        width: 80%;
+        padding: 1rem;
+        /* border: 1px solid black; */
+        margin: 2rem auto;
+
+    }
+    .admin-panel-btn{
+        width: 60%;
+        border: none;
+        border-radius: .5rem;
+        font-size: 1.7rem;
+        font-weight: 600;
+        color: white;
+        background-color: #832729;
+        text-align: center;
+        padding: 1.2rem;
+        margin: 1.3rem 0;
+        outline: none;
+        cursor: pointer;
     }
 }
 
@@ -865,8 +896,11 @@
         color: white;
         padding: 1rem;
     }
-
-
+  .add-product-container form{
+        width: 95%;
+        
+    }
+   
 
 
 

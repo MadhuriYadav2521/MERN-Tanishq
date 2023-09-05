@@ -3211,3 +3211,32 @@ input:checked{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+
+  .no-content {
+    width: 90%;
+    margin: auto;
+    /* border: 1px solid black; */
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.no-content div{
+    width: 50%;
+    /* border: 1px solid peru; */
+}
+.no-content div img{
+    width: 100%;
+}
+.spFooterImgContent{
+    width: 90%;
+    /* border: 1px solid salmon; */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.spFooterImgContent img{
+    width: 50%;
+}
