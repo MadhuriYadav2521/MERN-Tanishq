@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <div>
 
-            <footer>
+            <footer style={{marginTop:"2rem"}}>
                 <div className="footer-section">
                     <div className="footer-top">
                         <div className="useful-links">

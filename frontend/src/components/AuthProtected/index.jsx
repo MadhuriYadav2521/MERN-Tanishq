@@ -12,9 +12,8 @@ const AuthProtected = ({ children }) => {
         return (
           
             <div>
-                {  <Navbar />}
                 <div className="container-header">
-                    <div className="container-title">This content is protected! Do login.</div>
+                    <div className="container-title">To view content do login!</div>
                     <div className=" text-center"> <button onClick={() => route('/login')} className="fbtn">Login</button></div>
                    
                 </div>

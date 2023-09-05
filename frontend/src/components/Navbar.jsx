@@ -40,7 +40,7 @@ const Navbar = () => {
                         </div>
                         <div className="top-menu-wrapper">
                             <div className="menu">
-                                <a href="">
+                                <a >
                                     <div className="menu-img">
                                         <Icon.ShopWindow className="bIcon" />
                                     </div>
@@ -49,26 +49,26 @@ const Navbar = () => {
                             </div>
                             {state.user ? (
                                 <div className="menu">
-                                    <a>
+                                    <a onClick={() => route('/orderHistory')}>
                                         <div className="menu-img">
                                             <Icon.Person className="bIcon" />
                                         </div>
-                                        <div onClick={() => route('/')} className="menu-title">{state.user.name}</div>
+                                        <div  className="menu-title">{state.user.name}</div>
                                     </a>
                                 </div>
                             ) : (
                                 <div className="menu">
-                                    <a>
+                                    <a onClick={() => route('/orderHistory')} >
                                         <div className="menu-img">
                                             <Icon.Person className="bIcon" />
                                         </div>
-                                        <div onClick={() => route('/register')} className="menu-title" >account</div>
+                                        <div  className="menu-title" >account</div>
                                     </a>
                                 </div>
                             )}
                             <div className="menu">
-                                <a href="">
-                                    <div className="menu-img">
+                                <a onClick={() => route('/')}>
+                                    <div  className="menu-img">
                                         <Icon.Heart className="bIcon" />
                                     </div>
                                     <div className="menu-title">wishlist</div>
@@ -84,11 +84,11 @@ const Navbar = () => {
                             </div>
                             {state.user ? (
                                 <div className="menu">
-                                    <a>
+                                    <a onClick={() => dispatch({ type: "Logout" })}>
                                         <div className="menu-img">
                                             <Icon.Arrow90degRight className="bIcon" />
                                         </div>
-                                        <div onClick={() => dispatch({ type: "Logout" })} className="menu-title">Logout</div>
+                                        <div  className="menu-title">Logout</div>
                                     </a>
                                 </div>
                             ) : (
@@ -102,10 +102,10 @@ const Navbar = () => {
                     <div className="hidden-nav-categories">
                         <div className="nav-category-container">
                             <ul>
-                                <li><a href="./index.html">Home</a></li>
-                                <li><a href="./signup.html">Sign up</a></li>
-                                <li><a href="./login.html">Sign in</a></li>
-                                <li><a href="">My Offers</a></li>
+                                <li><a onClick={() => route('/')}>Home</a></li>
+                                <li><a onClick={() => route('/login')}>Sign in</a></li>
+                                <li><a onClick={() => route('/orderHistory')}>My Orders</a></li>
+                                <li><a onClick={() => route('/')}>My Offers</a></li>
 
                             </ul>
                         </div>

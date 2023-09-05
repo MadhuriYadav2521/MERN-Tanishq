@@ -10,15 +10,17 @@ summary {
   details {
     border: 3px solid #F2E9E9;
     border-radius: 5px;
-    margin: 10px;
+    margin-bottom: 2px;
     
   }
 
   details[open] summary {
-    background-color: gray;
+    background-color: rgb(209, 209, 210);
   }
 
   details div {
     font-size: 1.5rem;
-    padding: 12px;
+    padding: 2px;
   }
+
+ 

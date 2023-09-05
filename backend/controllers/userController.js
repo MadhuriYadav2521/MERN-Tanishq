@@ -156,20 +156,12 @@ export const buyNow = async (req, res) => {
         const user = await Users.findById(userId).populate().exec();
         if (!user) return res.json({ error: "User not found!" });
 
-        //   extract product ids from the cart array
-        const productIds = cart.map(item => item._id);
-
-        const currentDate = new Date();  
-
-        const transactionObj = {
+        const addToTransaction = new Transactions({
             userId: user._id,
-            cart: productIds, 
+            cart,
             totalPrice,
             totalProducts,
-            createdAt: currentDate, 
-        };
-
-        const addToTransaction = new Transactions({ transaction: transactionObj })
+        });
         await addToTransaction.save();
         console.log(addToTransaction, "addToTransactions");
 
@@ -184,3 +176,63 @@ export const buyNow = async (req, res) => {
         return res.json({ error: "Internal server error!" })
     }
 }
+
+
+export const getOrderHistory = async (req, res) => {
+    try {
+        const { userId } = req.body;
+        if (!userId) return res.json({ error: "User id is required!" });
+
+        const orders = await Transactions.find({ userId }).populate('cart').exec();
+        console.log(orders, "orders");
+        if (!orders) return res.json({ error: "You have not placed any orders yet!" });
+
+        // create an arrray to store the order history
+        const orderHistory = [];
+
+        for (const order of orders) {
+            // extraact the product IDs from the cart for this order
+            const productIds = order.cart.map(item => item._id);
+
+            //   find the cart products for this order
+            const cartProducts = await Products.find({ _id: { $in: productIds } }).exec();
+
+            // add this  order to the order hiistory
+            orderHistory.push({
+                orderDetails: order,
+                cartProducts: cartProducts,
+            });
+        }
+
+        return res.json({ success: true, orderHistory });
+
+    } catch (err) {
+        console.log(err);
+        return res.json({ error: "Internal server error!" })
+    }
+}
+
+
+
+
+// export const buyNow = async (req, res) => {
+//     try {
+//         const { userId, cart, totalPrice, totalProducts } = req.body;
+//         if (!userId) return res.json({ error: "User id is required!" });
+//         console.log(userId, cart, totalPrice, totalProducts, " userId, cart,totalPrice, totalProducts");
+
+//         const user = await Users.findById(userId).populate().exec();
+//         if (!user) return res.json({ error: "User not found!" });
+
+//         const addToTransaction = new Transactions({ transaction: user.cart })
+//         await addToTransaction.save();
+//         console.log(addToTransaction, "addToTransactions");
+
+
+//         return res.json({ success: true, finalCart })
+
+//     } catch (err) {
+//         console.log(err);
+//         return res.json({ error: "Internal server error!" })
+//     }
+// }
