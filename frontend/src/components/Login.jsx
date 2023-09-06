@@ -32,7 +32,12 @@ const Login = () => {
             localStorage.setItem("TanishqJWT", JSON.stringify(response.data.token))
             setUserData({ email: '', password: '' });
             toast.success("Logged in!")
-            route('/')
+            
+            if(response.data.user.role == "seller"){
+                route('/sellerDashboard')
+            }else{
+                route('/')
+            }
         } else {
             toast.error(response.data.error)
         }

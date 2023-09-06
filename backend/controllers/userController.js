@@ -7,7 +7,7 @@ import Transactions from "../modals/transactionModal.js"
 
 export const Register = async (req, res) => {
     try {
-        const { userName, email, password } = req.body.userData;
+        const { userName, email, password, role } = req.body.userData;
         console.log(req.body.userData);
         const existingUser = await Users.findOne({ email }).exec();
         if (existingUser) return res.json({ error: "User with this email already exist!" });
@@ -16,7 +16,7 @@ export const Register = async (req, res) => {
         if (!hashedPassword) return res.json({ error: "Error while storing password!" })
         console.log(hashedPassword);
         const user = new Users({
-            userName, email, password: hashedPassword
+            userName, email, password: hashedPassword,role
         });
         console.log(user, "user");
         await user.save();
@@ -38,7 +38,7 @@ export const Login = async (req, res) => {
         const isPasswordCorrect = bcrypt.compareSync(password, user.password);
         if (!isPasswordCorrect) return res.json({ error: "Wrong credentials!" })
 
-        const userObj = { id: user._id, name: user.userName, email: user.email }
+        const userObj = { id: user._id, name: user.userName, email: user.email,role: user.role }
         const token = jwt.sign({ userId: user._id }, process.env.TOKEN);
 
         return res.json({ success: true, user: userObj, token })
@@ -61,7 +61,7 @@ export const CurrentUser = async (req, res) => {
 
         const user = await Users.findOne({ _id: currentUser }).exec();
         if (user) {
-            const userObj = { id: user._id, name: user.userName, email: user.email };
+            const userObj = { id: user._id, name: user.userName, email: user.email, role: user.role };
             return res.json({ success: true, user: userObj });
         }
         // return res.json({ error: "User not found!" })

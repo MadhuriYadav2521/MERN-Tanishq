@@ -1,4 +1,3 @@
-
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../components/accordian.css"
@@ -7,7 +6,7 @@ import { AuthContext } from "../Context/AuthContext";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import AuthProtected from "./AuthProtected";
+import { AuthProtected } from "./AuthProtected";
 
 
 const OrderHistory = () => {
@@ -51,61 +50,63 @@ const OrderHistory = () => {
                 </div>
             ) : (
                 <AuthProtected>
-                <div>
-                    {orderData?.length ? (
-                        <div className="screen">
-                            <div className="container" style={{ width: "90%", margin: " 0 auto 5rem auto" }}>
-                            <h1 style={{margin:"2rem 0",color:"#832729"}}>Order History</h1>
+                    <div>
+                        {orderData?.length ? (
+                            <div className="screen">
+                                <div className="container" style={{ width: "90%", margin: " 0 auto 5rem auto" }}>
+                                    <h1 style={{ margin: "2rem 0", color: "#832729" }}>Order History</h1>
 
-                                {orderData.map((orderHead) => (
-                                    <details>
-                                        <summary>
-                                            
-                                            <div> Order Id : {orderHead.orderDetails._id}</div>
-                                            <div  >Order Date : {orderHead.orderDetails.createdAt}</div>
+                                    {orderData.map((orderHead) => (
+                                        <details>
+                                            <summary>
+
+                                                <div> Order Id : {orderHead.orderDetails._id}</div>
+                                                <div  >Order Date : {orderHead.orderDetails.createdAt}</div>
 
 
-                                        </summary>
-                                        <div>
-                                            {orderHead.cartProducts.map((pro) => (
-                                                <div>
-                                                    <div className="cart-products" key={pro._id} style={{ justifyContent: "start", margin: "1rem 0 0 0", padding: "0", border:"none",borderBottom:"1px solid lightgray" }}>
-                                                        <div className="cart-product-img" style={{ width: "13%" }} id="productImage">
-                                                            <img src={pro.productImg} className="got-image" alt="" />
-                                                        </div>
-                                                        <div className="cart-product-details" style={{ paddingLeft: "10px" }} >
-                                                            <div className="cart-product-name" id="productName">{pro.productName}</div>
-                                                            <div className="cart-product-id">{pro._id}</div>
-                                                            <div className="cart-price-section">
-                                                                <div className="c-real-price" id="productPrice">₹ {pro.price} </div>
+                                            </summary>
+                                            <div>
+                                                {orderHead.cartProducts.map((pro) => (
+                                                    <div>
+                                                        <div className="cart-products" key={pro._id} style={{ justifyContent: "start", margin: "1rem 0 0 0", padding: "0", border: "none", borderBottom: "1px solid lightgray" }}>
+                                                            <div className="cart-product-img" style={{ width: "13%" }} id="productImage">
+                                                                <img src={pro.productImg} className="got-image" alt="" />
+                                                            </div>
+                                                            <div className="cart-product-details" style={{ paddingLeft: "10px" }} >
+                                                                <div className="cart-product-name" id="productName">{pro.productName}</div>
+                                                                <div className="cart-product-id">{pro._id}</div>
+                                                                <div className="cart-price-section">
+                                                                    <div className="c-real-price" id="productPrice">₹ {pro.price} </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            ))}
-                                            <div>
-                                                <div style={{display:"flex",padding: "1rem 0"}}>
-                                                    <h5 className="c-real-price">Total Price : <span style={{fontWeight:"normal"}}>{orderHead.orderDetails.totalPrice}</span></h5>
-                                                    <h5 className="c-real-price" style={{paddingLeft:"3rem"}}>Total Products : <span style={{fontWeight:"normal"}}>{orderHead.orderDetails.totalProducts}</span></h5>
+                                                ))}
+                                                <div>
+                                                    <div style={{ display: "flex", padding: "1rem 0" }}>
+                                                        <h5 className="c-real-price">Total Price : <span style={{ fontWeight: "normal" }}>{orderHead.orderDetails.totalPrice}</span></h5>
+                                                        <h5 className="c-real-price" style={{ paddingLeft: "3rem" }}>Total Products : <span style={{ fontWeight: "normal" }}>{orderHead.orderDetails.totalProducts}</span></h5>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </details>
-                                ))}
+                                        </details>
+                                    ))}
 
 
+                                </div>
                             </div>
-                        </div>
-                    ) : (
-                        <div className="screen">
-                            <div className="cFooterImgContent" >
-                                <img src="https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dwd15e3cb8/images/no-order.svg" alt="" />
-                                <h1 className="container-title">No order details yet. Add Tanishq to your jewellery wordrobe!</h1>
-                                <button onClick={() => router('/')} className="fbtn">Continue shopping</button>
+                        ) : (
+                            <div className="screen">
+                                <div className="cparent">
+                                    <div className="cFooterImgContent" >
+                                        <img src="https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dwd15e3cb8/images/no-order.svg" alt="" />
+                                        <h1 className="container-title">No order details yet. Add Tanishq to your jewellery wordrobe!</h1>
+                                        <button onClick={() => router('/')} className="fbtn">Continue shopping</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    )}
-                </div>
+                        )}
+                    </div>
                 </AuthProtected>
             )}
         </div>

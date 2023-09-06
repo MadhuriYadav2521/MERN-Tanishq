@@ -1,7 +1,7 @@
 import "../components/style.css";
 import "../components/responsive.css";
 import * as Icon from "react-bootstrap-icons";
-import AuthProtected from "./AuthProtected";
+import {AuthProtected} from "./AuthProtected";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useNavigate, useParams } from "react-router-dom";

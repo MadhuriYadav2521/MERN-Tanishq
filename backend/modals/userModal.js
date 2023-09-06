@@ -14,6 +14,11 @@ const userSchema = new Schema({
         type: String,
         require: true
     },
+    role :{
+        type: String,
+        enum: ['buyer', 'seller', 'admin'],
+        default: 'buyer'
+    },
     cart : [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Products"

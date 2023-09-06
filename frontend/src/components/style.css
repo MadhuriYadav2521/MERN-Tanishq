@@ -2899,7 +2899,7 @@ span:nth-child(3) {
     color: #832729;
 }
 .input_wrap input[type="text"],
-input[type="email"],
+input[type="email"], select,
 input[type="password"],input[type="number"] {
     border: .1rem solid black;
     height: 4.7rem;
@@ -2910,7 +2910,15 @@ input[type="password"],input[type="number"] {
     box-shadow: none;
     outline: none;
 }
-
+/* .opt *
+{
+ border-radius: 15px;
+ font-size: 1.8rem;
+ padding: 1.5rem;
+}
+.opt *:hover{
+    background-color: #A86769;
+} */
 
 .input_wrap input:focus+label,
 input:valid+label {
@@ -3146,7 +3154,11 @@ input:checked{
     width: 50%;
     padding: 3rem;
     /* border: 1px solid black; */
-    margin: 4rem auto;
+    /* margin: 4rem auto; */
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 .admin-panel-title{
@@ -3254,6 +3266,11 @@ input:checked{
     width: 20%;
     padding: 2rem 0;
 }
-
+.centerMsg{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
 
   

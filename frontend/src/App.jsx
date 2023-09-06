@@ -10,8 +10,8 @@ import SuccessPage from './components/SuccessPage';
 import AddProduct from './components/AddProduct';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import AdminNavbar from './components/AdminNavbar';
 import OrderHistory from './components/OrderHistory';
+import SellerDashboard from './components/SellerDashboard';
 
 
 function App() {
@@ -21,7 +21,6 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='navbar' element={<Navbar />} />
         <Route path='footer' element={<Footer />} />
-        <Route path='adminNavbar' element={<AdminNavbar />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/multipleProducts' element={<MultipleProducts />} />
@@ -30,6 +29,7 @@ function App() {
         <Route path='/successPage' element={<SuccessPage />} />
         <Route path='/addProduct' element={<AddProduct />} />
         <Route path='/orderHistory' element={<OrderHistory />} />
+        <Route path='/sellerDashboard' element={<SellerDashboard />} />
       </Routes>
     </div>
   );
