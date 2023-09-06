@@ -35,7 +35,7 @@
     }
 
     .left-top-nav {
-        width: 12%;
+        width: auto;
         display: flex;
         align-items: center;
         gap: .5rem;
@@ -67,21 +67,15 @@
     }
 
     .top-menu-wrapper {
-        width: 15%;
+        width: auto;
+        gap: 20px;
     }
 
     .menu-img {
         width: 47%;
     }
 
-    .menu:nth-child(2) {
-        display: none;
-    }
-
-    .menu:nth-child(5) {
-        display: none;
-    }
-
+   
     .menu-title {
         display: none;
     }

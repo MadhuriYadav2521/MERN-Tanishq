@@ -228,6 +228,7 @@ const ProductCart = () => {
                             <div className="screen">
                                 <div className="cFooterImgContent">
                                    <img src="https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dw39d0b5f4/images/cart/Group14779.svg" alt="" />
+                                   <h1 className="container-title">Your cart is empty. Let's buy something!</h1>
                                     <button onClick={() => router('/')} className="checkout-btn">Continue shopping</button>
                                 </div>
 

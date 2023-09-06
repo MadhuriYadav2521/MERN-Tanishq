@@ -60,9 +60,9 @@ const OrderHistory = () => {
                                 {orderData.map((orderHead) => (
                                     <details>
                                         <summary>
-
-                                            <span> Order Id : {orderHead.orderDetails._id}</span>
-                                            <span style={{ float: "right" }}>Order Date : {orderHead.orderDetails.createdAt}</span>
+                                            
+                                            <div> Order Id : {orderHead.orderDetails._id}</div>
+                                            <div  >Order Date : {orderHead.orderDetails.createdAt}</div>
 
 
                                         </summary>
@@ -97,9 +97,10 @@ const OrderHistory = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className="">
-                            <div className="spFooterImgContent" >
-                                <img src="https://stores.maxfashion.in/VendorpageTheme/Enterprise/EThemeForMax/images/product-not-found.jpg" alt="" />
+                        <div className="screen">
+                            <div className="cFooterImgContent" >
+                                <img src="https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dwd15e3cb8/images/no-order.svg" alt="" />
+                                <h1 className="container-title">No order details yet. Add Tanishq to your jewellery wordrobe!</h1>
                                 <button onClick={() => router('/')} className="fbtn">Continue shopping</button>
                             </div>
                         </div>

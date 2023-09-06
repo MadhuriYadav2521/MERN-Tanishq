@@ -16,9 +16,6 @@ const Navbar = () => {
 
                     <div className="top-navbar-container">
                         <div className="left-top-nav">
-                            {/* <!-- <a href="">
-                                    <img src="./img/hamburger.png" alt="" onclick="w3_open()">
-                                </a> --> */}
                             <a href="./Add-product.html">
                                 <Icon.List className="bIcon" />
                             </a>
@@ -40,7 +37,7 @@ const Navbar = () => {
                         </div>
                         <div className="top-menu-wrapper">
                             <div className="menu">
-                                <a >
+                                <a onClick={() => route('/')}>
                                     <div className="menu-img">
                                         <Icon.ShopWindow className="bIcon" />
                                     </div>
