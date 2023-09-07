@@ -61,3 +61,23 @@ export const getSingleProduct = async (req,res) =>{
         return res.json({error: "Internal server error!"})
     }
 }
+
+export const sellerAllProducts = async (req,res) =>{
+    try {
+        const {sellerId} = req.body;
+        if(!sellerId) return res.json({error: "Seller id is required!"})
+
+        const seller = await Users.findOne({_id: sellerId}).exec();
+        if(!seller) return res.json({error: "Seller not found!"});
+
+        const product = await Products.find({sellerId :sellerId }).exec();
+        if(product){
+            return res.json({success: true, product})
+        }else{
+            return res.json({error: "Products not found!"})
+        }
+    } catch (err) {
+        console.log(err);
+        return res.json({error: "Internal server error!"})
+    }
+}

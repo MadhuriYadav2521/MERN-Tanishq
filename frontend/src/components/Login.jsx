@@ -34,7 +34,7 @@ const Login = () => {
             toast.success("Logged in!")
             
             if(response.data.user.role == "seller"){
-                route('/sellerDashboard')
+                route('/sellerHome')
             }else{
                 route('/')
             }
@@ -77,6 +77,7 @@ const Login = () => {
                                 <input type="submit" value="Login" />
 
                             </div>
+                            <p className="form-t-and-c">New here? <span className="t-c-style" onClick={()=>route('/register')}>Sign up</span></p>
 
                         </form>
 

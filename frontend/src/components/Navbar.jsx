@@ -8,6 +8,10 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
     const { state, dispatch } = useContext(AuthContext);
     const route = useNavigate();
+    const Logout = () =>{
+        dispatch({ type: "Logout"})
+        route('/')
+    }
     return (
         <div>
 
@@ -62,7 +66,7 @@ const Navbar = () => {
                                 </>
                             ) : (
                                 <div className="menu">
-                                    <a onClick={() => route('/orderHistory')} >
+                                    <a onClick={() => route('/login')} >
                                         <div className="menu-img">
                                             <Icon.Person className="bIcon" />
                                         </div>
@@ -81,11 +85,11 @@ const Navbar = () => {
                                         </a>
                                     </div>
                                     <div className="menu">
-                                        <a onClick={() => route('/productCart')}>
+                                        <a onClick={() => route('/sellerAllProducts')}>
                                             <div className="menu-img">
                                                 <Icon.Box2 className="bIcon" />
                                             </div>
-                                            <div className="menu-title">Update</div>
+                                            <div className="menu-title">All</div>
                                         </a>
                                     </div>
                                     <div className="menu">
@@ -127,7 +131,7 @@ const Navbar = () => {
                             )}
                             {state.user ? (
                                 <div className="menu">
-                                    <a onClick={() => dispatch({ type: "Logout" })}>
+                                    <a onClick={Logout}>
                                         <div className="menu-img">
                                             <Icon.Arrow90degRight className="bIcon" />
                                         </div>

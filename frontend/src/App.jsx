@@ -12,6 +12,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import OrderHistory from './components/OrderHistory';
 import SellerHome from './components/Seller/SellerHome';
+import SellerAllProducts from './components/Seller/SellerAllProducts';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path='/addProduct' element={<AddProduct />} />
         <Route path='/orderHistory' element={<OrderHistory />} />
         <Route path='/sellerHome' element={<SellerHome />} />
+        <Route path='/sellerAllProducts' element={<SellerAllProducts />} />
       </Routes>
     </div>
   );

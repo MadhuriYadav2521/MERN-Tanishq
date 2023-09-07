@@ -90,7 +90,7 @@ const SingleProduct = () => {
                                             <div class="path">
                                                 <span>Home</span>
                                                 <span>|</span>
-                                                <span>Earrings</span>
+                                                <span>{product.category}</span>
                                                 <span>|</span>
                                                 <span className="ellipsis">{product.productName}</span>
                                             </div>

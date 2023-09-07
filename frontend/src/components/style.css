@@ -306,26 +306,6 @@ a {
     opacity: 1;
 }
 
-/* #slide1:checked~#controls label:nth-child(2),
-#slide2:checked~#controls label:nth-child(3),
-#slide3:checked~#controls label:nth-child(4),
-#slide4:checked~#controls label:nth-child(1) {
-    background: url(./img/la.png) no-repeat;
-
-    float: right;
-    margin: 0 -5rem 0 0;
-    display: block;
-}
-
-#slide1:checked~#controls label:nth-last-child(2),
-#slide2:checked~#controls label:nth-last-child(3),
-#slide3:checked~#controls label:nth-last-child(4),
-#slide4:checked~#controls label:nth-last-child(1) {
-    background: url(./img/ra.png) no-repeat;
-    float: left;
-    margin: 0 0 0 -5rem;
-    display: block;
-} */
 
 #bullets {
     margin: 1.2rem 0 1.2rem 0;

@@ -88,6 +88,7 @@ const Register = () => {
                                 <input type="submit" value="Sign Up" />
 
                             </div>
+                            <p className="form-t-and-c">Already have account? <span className="t-c-style" onClick={()=>route('/login')}>Sign in</span></p>
 
                         </form>
 
