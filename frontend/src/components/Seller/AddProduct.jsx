@@ -1,24 +1,26 @@
-import "../components/style.css";
-import "../components/responsive.css";
-import { useState } from "react";
+import "../style.css";
+import "../responsive.css";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { SellerProtected } from './AuthProtected';
-import Navbar from "./Navbar";
+import { SellerProtected } from '../AuthProtected';
+import Navbar from "../Navbar";
+import { AuthContext } from "../../Context/AuthContext";
 
 const AddProduct = () => {
-    const [productData, setProductData] = useState({ productName: '', price: '', productImg: '' })
+    const {state} = useContext(AuthContext)
+    const [productData, setProductData] = useState({ productName: '', price: '', productImg: '',category: '' })
     const handleChange = (event) => {
         event.preventDefault();
         setProductData({ ...productData, [event.target.name]: event.target.value });
     }
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { productName, price, productImg } = productData
-        console.log(productName, price, productImg);
-        const response = await axios.post('http://localhost:8000/admin/addProduct', { productData });
+        const { productName, price, productImg, category } = productData
+        console.log(productName, price, productImg, category);
+        const response = await axios.post('http://localhost:8000/seller/addProduct', { productData, userId : state?.user?.id });
         if (response.data.success) {
-            setProductData({ productName: '', price: '', productImg: '' });
+            setProductData({ productName: '', price: '', productImg: '',category: '' });
             toast.success("Product added successfully!")
         } else {
             toast.error(response.data.error)
@@ -35,6 +37,10 @@ const AddProduct = () => {
                             <div class="input_wrap">
                                 <input type="text" name="productName" onChange={handleChange} required autocomplete="off" />
                                 <label>Product Name</label>
+                            </div>
+                            <div class="input_wrap">
+                                <input type="text" name="category" onChange={handleChange} required autocomplete="off" />
+                                <label>Category</label>
                             </div>
                             <div class="input_wrap">
                                 <input type="number" name="price" onChange={handleChange} required autocomplete="off" />

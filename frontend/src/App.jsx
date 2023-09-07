@@ -7,11 +7,11 @@ import MultipleProducts from './components/MultipleProducts';
 import SingleProduct from './components/SingleProduct';
 import ProductCart from './components/ProductCart';
 import SuccessPage from './components/SuccessPage';
-import AddProduct from './components/AddProduct';
+import AddProduct from './components/Seller/AddProduct';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import OrderHistory from './components/OrderHistory';
-import SellerDashboard from './components/SellerDashboard';
+import SellerHome from './components/Seller/SellerHome';
 
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         <Route path='/successPage' element={<SuccessPage />} />
         <Route path='/addProduct' element={<AddProduct />} />
         <Route path='/orderHistory' element={<OrderHistory />} />
-        <Route path='/sellerDashboard' element={<SellerDashboard />} />
+        <Route path='/sellerHome' element={<SellerHome />} />
       </Routes>
     </div>
   );

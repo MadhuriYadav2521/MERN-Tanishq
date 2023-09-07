@@ -109,9 +109,12 @@ const MultipleProducts = () => {
                         </div>
                     ) : (  
                         <div className="screen">
-                            <div className="spFooterImgContent" >
+                            <div className="cFooterImgContent" >
+                            
                                 <img src="https://stores.maxfashion.in/VendorpageTheme/Enterprise/EThemeForMax/images/product-not-found.jpg" alt="" />
-                                <button onClick={() => router('/')} className="fbtn">Continue shopping</button>
+
+                                    <button onClick={() => router('/')} className="checkout-btn">Continue shopping</button>
+
                             </div>
                         </div>
                     )}

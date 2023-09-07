@@ -442,7 +442,7 @@ const SingleProduct = () => {
                             </div>
                         ) : (
                             <div className="screen">
-                                <div className="spFooterImgContent">
+                                <div className="cFooterImgContent">
                                     <img src="https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dw0b18ddbd/errorPage/404-Desktop.png" alt="" />
                                     <button onClick={() => router('/')} className="checkout-btn">Continue shopping</button>
                                 </div>

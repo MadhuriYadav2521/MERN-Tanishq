@@ -38,14 +38,28 @@ const Navbar = () => {
                         <div className="top-menu-wrapper">
 
                             {state.user ? (
-                                <div className="menu">
-                                    <a onClick={() => route('/orderHistory')}>
-                                        <div className="menu-img">
-                                            <Icon.Person className="bIcon" />
+                                <>
+                                    {state?.user?.role == "seller" ? (
+                                        <div className="menu">
+                                            <a onClick={() => route('/sellerHome')}>
+                                                <div className="menu-img">
+                                                    <Icon.Person className="bIcon" />
+                                                </div>
+                                                <div className="menu-title">{state.user.name}</div>
+                                            </a>
                                         </div>
-                                        <div className="menu-title">{state.user.name}</div>
-                                    </a>
-                                </div>
+                                    ) : (
+                                        <div className="menu">
+                                        <a onClick={() => route('/orderHistory')}>
+                                            <div className="menu-img">
+                                                <Icon.Person className="bIcon" />
+                                            </div>
+                                            <div className="menu-title">{state.user.name}</div>
+                                        </a>
+                                    </div>
+                                    )}
+
+                                </>
                             ) : (
                                 <div className="menu">
                                     <a onClick={() => route('/orderHistory')} >

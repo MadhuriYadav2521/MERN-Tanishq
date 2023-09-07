@@ -1,17 +1,26 @@
 import Products from "../modals/productModal.js"
+import Users from "../modals/userModal.js"
 
 export const addProduct = async (req, res) => {
     try {
-        const { productName, price, productImg } = req.body.productData
+        const { productName, price, productImg,category } = req.body.productData
+        const {userId} = req.body;
         console.log(req.body, "bodyyyy");
-        if (!productName || !price || !productImg) return res.json({ error: "Please fill all the fields!" });
 
-        const existingProduct = await Products.findOne({ productName }).exec();
+        if(!userId) return res.json({error: "Seller Id is required!"})
+        const user = await Users.findOne({_id: userId}).exec();
+        if(!user) return res.json({error: "User not found!"})
+
+        if(user.role !== "seller") return res.json({error: "You are not allowed to add product!"})
+
+        if (!productName || !price || !productImg || !category) return res.json({ error: "Please fill all the fields!" });
+
+        const existingProduct = await Products.findOne({ productName, sellerId : userId }).exec();
         console.log(existingProduct, "exxx");
         if (existingProduct) return res.json({ error: "Product already exist!" });
 
         const product = new Products({
-            productName, price, productImg
+            productName, price, productImg, category, sellerId: user._id
         });
         await product.save();
         return res.json({ success: true, product });

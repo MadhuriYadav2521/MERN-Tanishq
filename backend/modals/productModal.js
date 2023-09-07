@@ -4,7 +4,12 @@ import { Schema } from "mongoose";
 const productSchema = new Schema({
     productName: String,
     price : Number,
-    productImg : String
+    productImg : String,
+    category : String,
+    sellerId : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref: "Users"
+    }
 }, { timestamps: true }
 );
 
