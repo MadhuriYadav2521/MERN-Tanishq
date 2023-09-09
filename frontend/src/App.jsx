@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import OrderHistory from './components/OrderHistory';
 import SellerHome from './components/Seller/SellerHome';
 import SellerAllProducts from './components/Seller/SellerAllProducts';
+import UpdateProduct from './components/Seller/UpdateProduct';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path='/orderHistory' element={<OrderHistory />} />
         <Route path='/sellerHome' element={<SellerHome />} />
         <Route path='/sellerAllProducts' element={<SellerAllProducts />} />
+        <Route path='/getUpdateProduct/:pid' element={<UpdateProduct />} />
       </Routes>
     </div>
   );

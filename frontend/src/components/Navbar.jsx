@@ -81,7 +81,7 @@ const Navbar = () => {
                                             <div className="menu-img">
                                                 <Icon.FolderPlus className="bIcon" />
                                             </div>
-                                            <div className="menu-title">Add</div>
+                                            <div className="menu-title">Add Product</div>
                                         </a>
                                     </div>
                                     <div className="menu">
@@ -89,15 +89,7 @@ const Navbar = () => {
                                             <div className="menu-img">
                                                 <Icon.Box2 className="bIcon" />
                                             </div>
-                                            <div className="menu-title">All</div>
-                                        </a>
-                                    </div>
-                                    <div className="menu">
-                                        <a onClick={() => route('/productCart')}>
-                                            <div className="menu-img">
-                                                <Icon.FolderX className="bIcon" />
-                                            </div>
-                                            <div className="menu-title">Delete</div>
+                                            <div className="menu-title">All Products</div>
                                         </a>
                                     </div>
                                 </>
