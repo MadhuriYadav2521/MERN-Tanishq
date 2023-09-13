@@ -68,7 +68,7 @@ const Login = () => {
                                 <input type="password" name="password" onChange={handleChange} required autoComplete="off" />
                                 <label>Enter your password</label>
                             </div>
-                            <input type="checkbox" name="checkbox" />
+                            <input type="checkbox" name="checkbox" defaultChecked readOnly />
                             <label>Remember Me</label>
 
                             <p className="form-t-and-c">By continuing, I agree to <span className="t-c-style">Terms of Use</span>

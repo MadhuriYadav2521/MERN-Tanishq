@@ -12,6 +12,7 @@ const Navbar = () => {
         dispatch({ type: "Logout"})
         route('/')
     }
+    console.log(state?.cart?.totalCartProducts,"totalCartProducts from nav");
     return (
         <div>
 
@@ -111,12 +112,17 @@ const Navbar = () => {
                                             <div className="menu-title">wishlist</div>
                                         </a>
                                     </div>
-                                    <div className="menu">
+                                    <div className="menu" style={{position:"relative"}}>
                                         <a onClick={() => route('/productCart')}>
                                             <div className="menu-img">
-                                                <Icon.Cart className="bIcon" />
+                                                <Icon.Cart className="bIcon " />
                                             </div>
-                                            <div className="menu-title">cart</div>
+                                            <div className="menu-title ">cart</div>
+                                          {state?.cart?.totalCartProducts ?(
+                                               <> <div className="cBadge"> {state?.cart?.totalCartProducts}</div></>
+                                          ):(
+                                            <></>
+                                          )}
                                         </a>
                                     </div>
                                 </>
@@ -125,7 +131,7 @@ const Navbar = () => {
                                 <div className="menu">
                                     <a onClick={Logout}>
                                         <div className="menu-img">
-                                            <Icon.Arrow90degRight className="bIcon" />
+                                            <Icon.BoxArrowRight className="bIcon" />
                                         </div>
                                         <div className="menu-title">Logout</div>
                                     </a>

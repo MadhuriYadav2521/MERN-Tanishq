@@ -16,7 +16,7 @@ export const Register = async (req, res) => {
         if (!hashedPassword) return res.json({ error: "Error while storing password!" })
         console.log(hashedPassword);
         const user = new Users({
-            userName, email, password: hashedPassword,role
+            userName, email, password: hashedPassword, role
         });
         console.log(user, "user");
         await user.save();
@@ -38,7 +38,7 @@ export const Login = async (req, res) => {
         const isPasswordCorrect = bcrypt.compareSync(password, user.password);
         if (!isPasswordCorrect) return res.json({ error: "Wrong credentials!" })
 
-        const userObj = { id: user._id, name: user.userName, email: user.email,role: user.role }
+        const userObj = { id: user._id, name: user.userName, email: user.email, role: user.role }
         const token = jwt.sign({ userId: user._id }, process.env.TOKEN);
 
         return res.json({ success: true, user: userObj, token })
@@ -88,8 +88,16 @@ export const addToCart = async (req, res) => {
         const user = await Users.findOneAndUpdate({ _id: userId }, { $push: { cart: productId } }, { new: true }).exec();
         if (!user) return res.json({ error: "User not found!" });
         console.log(user.cart, "userData");
-        const product = user.cart;
-        return res.json({ success: true, product });
+        const products = user.cart;
+        const totalCartProducts = products.length
+        let total = 0;
+        for (let x of products) {
+            total = total + parseInt(x.price)
+        }
+        const cartObj = { allCartProducts: products, totalCartProducts }
+
+        console.log(cartObj, "cartobj");
+        return res.json({ success: true, cart: cartObj });
 
     } catch (err) {
         console.log(err);
@@ -112,8 +120,10 @@ export const getCartProduct = async (req, res) => {
             total = total + parseInt(x.price)
         }
         const totalCartProducts = productsOfCart.length
-        console.log(total, "total", totalCartProducts, "totalCartProducts");
-        return res.json({ success: true, productsOfCart, total, totalCartProducts })
+        const cartObj = { allCartProducts: productsOfCart, totalCartProducts }
+
+        console.log(total, "total", totalCartProducts, "totalCartProducts", cartObj, "cartobj");
+        return res.json({ success: true, productsOfCart, total, totalCartProducts, cart: cartObj })
 
     } catch (err) {
         console.log(err);
@@ -128,7 +138,7 @@ export const removeFromCart = async (req, res) => {
         if (!productId) return res.json({ error: "Product id is required!" })
         if (!userId) return res.json({ error: "User id id is required!" })
 
-        const updateCart = await Users.findOneAndUpdate({ _id: userId }, { $pull: { cart: productId } }).populate('cart').exec();
+        const updateCart = await Users.findOneAndUpdate({ _id: userId }, { $pull: { cart: productId } }, { new: true }).populate('cart').exec();
         console.log(updateCart, "up cart");
         if (!updateCart) return res.json({ error: "Error while removing product from cart!" });
 
@@ -138,8 +148,10 @@ export const removeFromCart = async (req, res) => {
             total = total + parseInt(x.price)
         }
         const totalCartProducts = productsOfCart.length
-        console.log(total, "total", totalCartProducts, "totalCartProducts");
-        return res.json({ success: true, productsOfCart, total, totalCartProducts })
+        const cartObj = { allCartProducts: productsOfCart, totalCartProducts }
+
+        console.log(total, "total", totalCartProducts, "totalCartProducts", cartObj, "cartobj");
+        return res.json({ success: true, productsOfCart, total, totalCartProducts, cart: cartObj })
 
 
     } catch (err) {
@@ -165,11 +177,13 @@ export const buyNow = async (req, res) => {
         await addToTransaction.save();
         console.log(addToTransaction, "addToTransactions");
 
-        const updateCart = await Users.findOneAndUpdate({ _id: userId }, { cart: [] }).exec();
+        const updateCart = await Users.findOneAndUpdate({ _id: userId }, { cart: [] }, { new: true }).exec();
         console.log(updateCart, "updateUserrr");
         const finalCart = updateCart.cart
+        const totalCartProducts = finalCart.length
+        const cartObj = { allCartProducts: finalCart, totalCartProducts }
 
-        return res.json({ success: true, finalCart })
+        return res.json({ success: true, finalCart, cart: cartObj })
 
     } catch (err) {
         console.log(err);

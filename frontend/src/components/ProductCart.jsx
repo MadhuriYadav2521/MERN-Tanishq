@@ -50,13 +50,17 @@ const ProductCart = () => {
             const response = await axios.post('http://localhost:8000/buyer/removeFromCart', { productId, userId: state?.user?.id });
             console.log(response, "response after remove from cart");
             if (response.data.success) {
+                // dispatch({
+                //     type: "RemoveFromCart",
+                //     payload: {
+                //         cart: response.data.productsOfCart,
+                //         totalPrice: response.data.total,
+                //         totalProducts: response.data.totalCartProducts
+                //     }
+                // })
                 dispatch({
                     type: "RemoveFromCart",
-                    payload: {
-                        cart: response.data.productsOfCart,
-                        totalPrice: response.data.total,
-                        totalProducts: response.data.totalCartProducts
-                    }
+                    payload: response.data.cart
                 })
                 setCart(response.data.productsOfCart);
                 setTotalPrice(response.data.total);
@@ -80,7 +84,7 @@ const ProductCart = () => {
             if(response.data.success){
                 dispatch({
                     type: "buyNow",
-                    payload : response.data.finalCart
+                    payload : response.data.cart
                 })
                 setCart(response.data.finalCart)
     

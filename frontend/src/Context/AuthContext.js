@@ -9,17 +9,17 @@ const initialState = { user: null, cart: [] };
 const reducer = (state, action) => {
     switch (action.type) {
         case "Login":
-            return { ...state, user: action.payload }
+            return { ...state, user: action.payload, cart: action.payload }
         case "Logout":
             localStorage.removeItem("TanishqJWT");
             toast.success("Logged out!")
-            return { ...state, user: null,cart: [...state.cart, action.payload]  }
+            return { ...state, user: null,cart: action.payload   }
         case "AddToCart":
-            return { ...state, cart: [...state.cart, action.payload] };
+            return { ...state, cart: action.payload  };
         case "RemoveFromCart":
-            return { ...state, cart: [...state.cart, action.payload] };
+            return { ...state, cart: action.payload  };
         case "buyNow":
-            return {...state, cart: [...state.cart, action.payload] }
+            return {...state, cart: action.payload  }
         default:
             return state;
     }

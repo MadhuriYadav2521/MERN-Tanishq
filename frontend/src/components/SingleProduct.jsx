@@ -16,6 +16,9 @@ const SingleProduct = () => {
     const { state, dispatch } = useContext(AuthContext)
     const [isLoading, setIsLoading] = useState(false);
     const router = useNavigate()
+    const [cart, setCart] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [totalProducts, setTotalProducts] = useState(0);
 
     // pass product id to backend and get product desc then display.
     useEffect(() => {
@@ -50,10 +53,18 @@ const SingleProduct = () => {
                 const { data } = await axios.post("http://localhost:8000/buyer/addToCart", { productId: id, userId: state?.user?.id })
                 console.log(data, "data");
                 if (data.success) {
+
+                    // dispatch({
+                    //     type: "AddToCart",
+                    //     payload: data.product
+                    // })
                     dispatch({
                         type: "AddToCart",
-                        payload: data.product
+                        payload:  data.cart 
                     })
+                    setCart(data.products);
+                    setTotalPrice(data.total);
+                    setTotalProducts(data.totalCartProducts);
                     toast.success("Product added to cart!")
                 } else {
                     toast.error(data.error)

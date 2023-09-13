@@ -79,7 +79,7 @@ const Register = () => {
                                 <input type="password" name="cpassword" onChange={handleChange} required autoComplete="off" />
                                 <label>Confirm password</label>
                             </div>
-                            <input type="checkbox" name="" id="checkbox" />
+                            <input type="checkbox" name="" id="checkbox" defaultChecked readOnly />
                             <label>Remember Me</label>
 
                             <p className="form-t-and-c">By continuing, I agree to <span className="t-c-style">Terms of Use</span>
