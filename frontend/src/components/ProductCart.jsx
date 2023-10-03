@@ -112,13 +112,6 @@ const ProductCart = () => {
                         {cart?.length ? (
                             <div className="cart-section">
                                 <div className="cart-container">
-                                    <div className="cart-login-section" onClick={() => router('/register')}>
-                                        <span className="cart-bold">register</span>
-                                        <span>/</span>
-                                        <span className="cart-bold">login</span>
-                                        <span>to get Exciting offers & benifits on your</span>
-                                        <span>Encircle points!</span>
-                                    </div>
 
                                     <div className="cart-wrapper">
                                         <div className="cart-left" id="finalcart">
