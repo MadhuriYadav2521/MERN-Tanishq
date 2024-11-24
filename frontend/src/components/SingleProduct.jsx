@@ -25,7 +25,7 @@ const SingleProduct = () => {
         const getSingleProduct = async () => {
             setIsLoading(true)
             try {
-                const response = await axios.get(`http://localhost:8000/getSingleProduct/${id}`);
+                const response = await axios.get(`https://mern-tanishq-backend.onrender.com/getSingleProduct/${id}`);
                 console.log(response, "response");
                 if (response.data.success) {
                     setProduct(response.data.product)
