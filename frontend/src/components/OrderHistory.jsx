@@ -19,7 +19,7 @@ const OrderHistory = () => {
         const getOrderHistory = async () => {
             setIsLoding(true)
             try {
-                const response = await axios.post('http://localhost:8000/buyer/getOrderHistory', { userId: state?.user?.id })
+                const response = await axios.post('https://mern-tanishq-backend.onrender.com/buyer/getOrderHistory', { userId: state?.user?.id })
                 console.log(response, "res from get history");
                 if (response.data.success) {
                     setOrderData(response.data.orderHistory)
