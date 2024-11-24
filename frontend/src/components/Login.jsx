@@ -22,7 +22,7 @@ const Login = () => {
         if (userData.password.length < 5)
             return toast.error("Password length should be atleast 5 characters!");
 
-        const response = await axios.post('http://localhost:8000/login', { userData });
+        const response = await axios.post('https://mern-tanishq-backend.onrender.com/login', { userData });
         console.log(response);
         if (response.data.success) {
             dispatch({
