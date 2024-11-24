@@ -28,7 +28,7 @@ const Register = () => {
             return toast.error("Password length should be atleast 5 characters!");
         if (userData.password !== userData.cpassword)
             return toast.error("Password and Confirm Password not matched!");
-        const response = await axios.post('http://localhost:8000/register', { userData });
+        const response = await axios.post('https://mern-tanishq-backend.onrender.com/register', { userData });
         console.log(response, "respomse");
         if (response.data.success) {
             setUserData({ userName: '', email: '', password: '', cpassword: '', role: '' });
