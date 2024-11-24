@@ -21,7 +21,7 @@ const ProductCart = () => {
         const getCartProduct = async () => {
             setIsLoading(true);
             try {
-                const response = await axios.post('http://localhost:8000/buyer/getCartProduct', { userId: state?.user?.id });
+                const response = await axios.post('https://mern-tanishq-backend.onrender.com/buyer/getCartProduct', { userId: state?.user?.id });
                 console.log(response, "response from cart");
                 if (response.data.success) {
                     setCart(response.data.productsOfCart);
