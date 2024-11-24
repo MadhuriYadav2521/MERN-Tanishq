@@ -18,7 +18,7 @@ const AddProduct = () => {
         event.preventDefault();
         const { productName, price, productImg, category } = productData
         console.log(productName, price, productImg, category);
-        const response = await axios.post('http://localhost:8000/seller/addProduct', { productData, userId : state?.user?.id });
+        const response = await axios.post('https://mern-tanishq-backend.onrender.com/seller/addProduct', { productData, userId : state?.user?.id });
         if (response.data.success) {
             setProductData({ productName: '', price: '', productImg: '',category: '' });
             toast.success("Product added successfully!")
