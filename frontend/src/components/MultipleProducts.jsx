@@ -17,7 +17,7 @@ const MultipleProducts = () => {
         const getAllProducts = async () => {
             setIsLoading(true)
             try {
-                const response = await axios.get('http://localhost:8000/getAllProducts');
+                const response = await axios.get('https://mern-tanishq-backend.onrender.com/getAllProducts');
                 if (response.data.success) {
                     setProducts(response.data.product)
                 } else {
