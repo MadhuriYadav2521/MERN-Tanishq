@@ -34,7 +34,7 @@ export const HandleAuth = ({ children }) => {
             console.log(token, "token from auth");
             if (token) {
                 console.log("if token");
-                const response = await axios.post("http://localhost:8000/currentUser", { token });
+                const response = await axios.post("https://mern-tanishq-backend.onrender.com/currentUser", { token });
                 console.log(response.data.success);
                 if (response.data.success) {
                     dispatch({
