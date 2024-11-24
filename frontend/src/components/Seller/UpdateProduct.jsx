@@ -19,7 +19,7 @@ const UpdateProduct = () => {
             setIsLoading(true)
             try {
                 console.log(pid, "pid");
-                const response = await axios.get(`http://localhost:8000/seller/getUpdateProduct/${pid}`)
+                const response = await axios.get(`https://mern-tanishq-backend.onrender.com/seller/getUpdateProduct/${pid}`)
                 console.log(response, "respons from get up");
                 if (response.data.success) {
                     setProductData(response.data.product)
