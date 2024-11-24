@@ -20,7 +20,7 @@ const SellerAllProducts = () => {
             setIsLoading(true)
             try {
                 console.log(state?.user?.id, "seller id");
-                const response = await axios.post('http://localhost:8000/seller/sellerAllProducts', { sellerId: state?.user?.id });
+                const response = await axios.post('https://mern-tanishq-backend.onrender.com/seller/sellerAllProducts', { sellerId: state?.user?.id });
                 if (response.data.success) {
                     setProducts(response.data.product)
                 } else {
